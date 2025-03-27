@@ -10,8 +10,9 @@ class FrontEndController extends Controller
 {
     public function index()
     {
-        $blogs = Blog::paginate(1);
-        return view('themes.index', compact('blogs'));
+        $blogs = Blog::latest()->paginate(1);
+        $blogSliders = Blog::latest()->take(6)->get();
+        return view('themes.index', compact('blogs', 'blogSliders'));
     }
     public function categories($id = 1)
     {
